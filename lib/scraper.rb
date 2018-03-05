@@ -7,6 +7,7 @@ class Scraper
   def self.scrape_index_page(index_url)
     html = open(index_url)
     doc = Nokogiri::HTML(html)
+
      doc.css('.student-card').collect do |student|
       {:name => student.css('h4').text, :location => student.css('p').text, :profile_url => student.css('a')[0]['href']}
     end
@@ -36,6 +37,23 @@ class Scraper
       end
     end
     student
+=======
+    my_hash = doc.css('.student-card').collect do |student|
+      {:name => student.css('h4').text,
+      :location => student.css('p').text,
+      :profile_url =>  doc.css('.student-card').first.css('a')[0]['href']}
+    end
+    #student name? = doc.css('.student-card').first.css('h4').text TRUE
+    #student location? = doc.css('.student-card').first.css TRUE
+    #student profile_url?  = doc.css('.student-card').first.css('a')[0]['href'] TRUE
+
+
+
+  end
+
+  def self.scrape_profile_page(profile_url)
+
+>>>>>>> ee21bad655f2196bfb55430efc0d6f526a173d38
   end
 
 end
